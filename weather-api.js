@@ -1,8 +1,17 @@
+class OpenWeather {
+  constructor(apiKey, units = 'imperial') {
+    this.apiKey = apiKey
+    this.units = units
+  }
 
-async function getWeather(zip, apiKey) {
-  const units = 'imperial'
-  const path = `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${apiKey}&units=${units}`
-  const res = await fetch(path)
-  const json = await res.json()
-  return json //returns the whole promise
+  async getWeather(zip) {
+    const {apiKey, units} = this
+    const path = `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${apiKey}&units=${units}`
+    const res = await fetch(path)
+    const json = await res.json()
+    return json //returns the whole promise
+  }
 }
+
+ 
+
