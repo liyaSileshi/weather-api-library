@@ -27,11 +27,11 @@
         border: 1px
       }
 
-      #form {
+      .form {
         display: flex;
       }
 
-      #form > input {
+      .form > input {
         flex: 1;
         padding: 1em;
         font-size: 1em;
@@ -41,7 +41,7 @@
         border-right: none;
       }
 
-      #form > button {
+      .form > button {
         padding: 0 1em;
         background-color: rgb(106, 177, 238);
         color: #fff;
@@ -51,6 +51,10 @@
         border-radius: 0 0.5rem 0.5rem 0;
         border: 1px solid #000;
         border-left: none;
+      }
+      
+      label {
+        font-weight: 400;
       }
     </style>
   </head>
@@ -62,7 +66,8 @@
       <p id="desc">
         <!-- description -->
       </p>
-      <form id="form">
+      <label>Please Enter zipcode</label>
+      <form id="formZip" class="form">
         <input 
           id="zip" 
           type="number" 
@@ -72,35 +77,120 @@
         >
         <button type="submit">Search</button>
       </form>
+      <br>
+      <label>Please Enter a city name</label>
+      <form id="formCity" class="form">
+        <input 
+          id="city" 
+          type="text" 
+          placeholder="City"
+          title="Please Enter a city name"
+        >
+        <button type="submit">Search</button>
+      </form>
+      <br>
+      <label>Please Enter a city ID</label>
+      <form id="formCityId" class="form">
+        <input 
+          id="cityId" 
+          type="text" 
+          placeholder="City ID"
+          title="Please Enter a city ID"
+        >
+        <button type="submit">Search</button>
+      </form>
+      <br>
+      <label>Please Enter Latitude and Longitude</label>
+      <form id="formGeo" class="form">
+        <input 
+          id="lat" 
+          type="text" 
+          placeholder="Latitude"
+          title="Please Enter latitude"
+        >
+        <input 
+          id="lon" 
+          type="text" 
+          placeholder="Longitude"
+          title="Please Enter longitude"
+        >
+        <button type="submit">Search</button>
+      </form>
     </div>
     <script src='weather-api.js'></script>
     <script>
       // ------------------------------------------------------
       // Developer Code
-
+      console.log('here')
       // Get Element refererences
       const tempEl = document.getElementById('temp')
       const descEl = document.getElementById('desc')
-      const formEl = document.getElementById('form')
+      const formZip = document.getElementById('formZip')
+      const formCity = document.getElementById('formCity')
+      const formCityId = document.getElementById('formCityId')
+      const formGeo = document.getElementById('formGeo')
       const zipInput = document.getElementById('zip')
-
+      const cityInput = document.getElementById('city')
+      const cityIdInput = document.getElementById('cityId')
+      const latInput = document.getElementById('lat')
+      const lonInput = document.getElementById('lon')
+      console.log(lonInput)
       const apiKey = '467355df4c808dd6134a3b64e9ace282'
-      const units = 'metric'
+      // '467355df4c808dd6134a3b64e9ace282'
+      const units = 'imperial'
       const weather = new OpenWeather(apiKey, units)
-
+      console.log(weather)
 
       // Define event listeners
-      formEl.addEventListener('submit', (e) => {
+      formZip.addEventListener('submit', (e) => {
         e.preventDefault()
         const zip = zipInput.value
-        
-        weather.getWeather(zip).then((json) => {
-          tempEl.innerHTML = json.main.temp
-          descEl.innerHTML = json.weather[0].description
+        console.log('zip here')
+
+        weather.getWeatherByZip(zip).then((json) => {
+          tempEl.innerHTML = json.temp
+          descEl.innerHTML = json.description
         }).catch((err) => {
           console.log(err.message)
         })
       }) 
+
+      formCity.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const city = cityInput.value
+        
+        weather.getWeatherByCity(city).then((json) => {
+          tempEl.innerHTML = json.temp
+          descEl.innerHTML = json.description
+        }).catch((err) => {
+          console.log(err.message)
+        })
+      }) 
+
+      formCityId.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const cityId = cityIdInput.value
+
+        weather.getWeatherByCityID(cityId).then((json) => {
+          tempEl.innerHTML = json.temp
+          descEl.innerHTML = json.description
+          console.log(json.temp)
+        }).catch((err) => {
+          console.log(err.message)
+        })
+      })
+
+      formGeo.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const lat = latInput.value
+        const lon = lonInput.value
+        weather.getWeatherByGeo(lat, lon).then((json) => {
+          tempEl.innerHTML = json.temp
+          descEl.innerHTML = json.description
+        }).catch((err) => {
+          console.log(err.message)
+        })
+      })
     </script>
   </body>
 </html>
