@@ -121,7 +121,7 @@
     <script>
       // ------------------------------------------------------
       // Developer Code
-      console.log('here')
+
       // Get Element refererences
       const tempEl = document.getElementById('temp')
       const descEl = document.getElementById('desc')
@@ -134,18 +134,16 @@
       const cityIdInput = document.getElementById('cityId')
       const latInput = document.getElementById('lat')
       const lonInput = document.getElementById('lon')
-      console.log(lonInput)
+
+
       const apiKey = '467355df4c808dd6134a3b64e9ace282'
-      // '467355df4c808dd6134a3b64e9ace282'
       const units = 'imperial'
       const weather = new OpenWeather(apiKey, units)
-      console.log(weather)
 
       // Define event listeners
       formZip.addEventListener('submit', (e) => {
         e.preventDefault()
         const zip = zipInput.value
-        console.log('zip here')
 
         weather.getWeatherByZip(zip).then((json) => {
           tempEl.innerHTML = json.temp
@@ -174,7 +172,6 @@
         weather.getWeatherByCityID(cityId).then((json) => {
           tempEl.innerHTML = json.temp
           descEl.innerHTML = json.description
-          console.log(json.temp)
         }).catch((err) => {
           console.log(err.message)
         })
