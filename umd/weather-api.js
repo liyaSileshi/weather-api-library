@@ -8,7 +8,6 @@
 
   var axios__default = /*#__PURE__*/_interopDefaultLegacy(axios);
 
-  // import fetch from 'node-fetch'
   if (typeof module !== 'undefined' && module.exports) { 
     console.log('this script is running in Node.js'); 
     // import fetch from 'node-fetch'

@@ -1,7 +1,3 @@
-// import fetch from 'node-fetch'
-// if in windows, don't import fetch
-// if in node import fetch
-// const axios = require('axios')
 import axios from 'axios'
 if (typeof module !== 'undefined' && module.exports) { 
   console.log('this script is running in Node.js'); 
