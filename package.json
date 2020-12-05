@@ -1,0 +1,29 @@
+{
+  "name": "@lstilahun/openweather-api-library",
+  "version": "1.0.1",
+  "description": "Wrapper library for Open Weather Map",
+  "main": "umd/weather-api.js",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "dotenv": "^8.2.0",
+    "gh-pages": "^3.1.0",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "rollup": "^2.34.1"
+  },
+  "scripts": {
+    "test": "jest",
+    "prepare": "rollup --config"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liyaSileshi/weather-api-library.git"
+  },
+  "author": "Liya Tilahun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/liyaSileshi/weather-api-library/issues"
+  },
+  "homepage": "https://github.com/liyaSileshi/weather-api-library#readme"
+}

@@ -117,11 +117,13 @@
         <button type="submit">Search</button>
       </form>
     </div>
-    <script src='weather-api.js'></script>
+    <!-- must import axios in the browser -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src='./umd/weather-api.js'></script>
     <script>
       // ------------------------------------------------------
       // Developer Code
-
+      console.log(OpenWeatherApi)
       // Get Element refererences
       const tempEl = document.getElementById('temp')
       const descEl = document.getElementById('desc')
@@ -136,10 +138,11 @@
       const lonInput = document.getElementById('lon')
 
 
+      
       const apiKey = '467355df4c808dd6134a3b64e9ace282'
       const units = 'imperial'
-      const weather = new OpenWeather(apiKey, units)
-
+      const weather = new OpenWeatherApi(apiKey, units)
+      console.log(weather)
       // Define event listeners
       formZip.addEventListener('submit', (e) => {
         e.preventDefault()
@@ -156,7 +159,7 @@
       formCity.addEventListener('submit', (e) => {
         e.preventDefault()
         const city = cityInput.value
-        
+        console.log(weather.getWeatherByCity(city))
         weather.getWeatherByCity(city).then((json) => {
           tempEl.innerHTML = json.temp
           descEl.innerHTML = json.description
